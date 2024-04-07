@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create SVG</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+  <header>
+
+  </header>
+  <main>
+    <section>
+      <div class="box" onmousemove="getCursor(event, false)" onmouseleave="getCursor(event, true)">
+        <div id="info"></div>
+        <svg class="view" id="canvas" viewBox="0 0 25 25">
+          <path id="bg" stroke-width=".1px" stroke="#c1c1c1" fill="transparent" />
+          <path stroke-width=".5px" stroke="#000" fill="transparent" />
+        </svg>
+      </div>
+    </section>
+
+    <section class="tools">
+      <div class="icons">
+        <div class="cent28 ico">
+          <svg id="cent28" stroke-width="2px" stroke="currentColor" fill="#000" viewBox="0 0 25 25"><path /></svg>
+        </div>
+        <div class="cont-icons">
+          <div class="sis4 ico">
+            <svg id="sis4" stroke-width="2px" stroke="currentColor" fill="#000" viewBox="0 0 25 25"><path /></svg>
+          </div>
+          <div class="tres2 ico">
+            <svg id="tres2" stroke-width="2px" stroke="currentColor" fill="#000" viewBox="0 0 25 25"><path /></svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="configIcons">
+        <div>Background: </div>
+        <input type="color" id="styleBg" value="#ffffff">
+      </div>
+      <div class="configIcons">
+        <div>Stroke Width: </div>
+        <input class="range" type="range" min="0" max="10" step=".1" value=".5" id="styleStrokeWith">
+      </div>
+      <div class="configIcons">
+        <div>Stroke Color: </div>
+        <input type="color" id="styleStroke">
+      </div>
+      <div class="configIcons">
+        <div>Fill Color: </div>
+        <input type="color" id="styleFill">
+      </div>
+    </section>
+  </main>
+
+  <div class="inputs">
+    <div class="controles">
+      <textarea name="commands" id="commnands" cols="33" rows="10"></textarea>
+      <div class="actions">
+        <button onclick="prinExample()">EXAMPLE</button>
+        <button onclick="clearIcon()">CLEAR</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!--<div class="col-md-6">
+
+    <svg width="500" height="500">
+      <defs>
+        <g id="cross">
+          <rect x="-5" y="-5" width="10" height="10" fill="none" stroke="#aaa" stroke-width="1px" />
+        </g>
+        <g id="crossFilled">
+          <rect x="-5" y="-5" width="10" height="10" fill="orange" stroke="#aaa" stroke-width="1px" />
+        </g>
+      </defs>
+      <g id="grid"></g>
+      <g id="curve"></g>
+
+    </svg>
+  </div>
+
+  <div class="col-md-6">
+    <h2>Path</h2>
+    <pre class="log"></pre>
+    <h3>Data</h3>
+    <pre class="data"></pre>
+  </div>-->
+
+
+  
+  <script src="./app.js"></script>
+
+</body>
+</html>
