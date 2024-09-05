@@ -1,98 +1,239 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Create SVG</title>
-  <link rel="stylesheet" href="main.css">
-</head>
-<body>
-  <header>
-
-  </header>
-  <main>
-    <section>
-      <div class="box" onmousemove="getCursor(event, false)" onmouseleave="getCursor(event, true)">
-        <div id="info"></div>
-        <svg class="view" id="canvas" viewBox="0 0 25 25">
-          <path id="bg" stroke-width=".1px" stroke="#c1c1c1" fill="transparent" />
-          <path stroke-width=".5px" stroke="#000" fill="transparent" />
-        </svg>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+    <title>CodeShape</title>
+    <link
+      rel="stylesheet"
+      href="main.css" />
+    <script src="./app.js" type="module"></script>
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <img src="./imgs/logo.webp" alt="logotipo" style="height: 165px;">
       </div>
-    </section>
 
-    <section class="tools">
-      <div class="icons">
-        <div class="cent28 ico">
-          <svg id="cent28" stroke-width="2px" stroke="currentColor" fill="#000" viewBox="0 0 25 25"><path /></svg>
+      <div class="file-name">
+        <div id="button-open-history-files">
+          <svg  xmlns="http://www.w3.org/2000/svg" width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 3m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" /><path d="M17 3m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" /><path d="M17 17m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" /><path d="M3 17m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" /><path d="M5 7l0 10" /><path d="M19 7l0 10" /><path d="M7 5l10 0" /><path d="M7 19l10 0" /></svg>
         </div>
-        <div class="cont-icons">
-          <div class="sis4 ico">
-            <svg id="sis4" stroke-width="2px" stroke="currentColor" fill="#000" viewBox="0 0 25 25"><path /></svg>
+
+        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" /><path d="M13.5 6.5l4 4" /><path d="M16 19h6" /></svg>
+        <span
+          contenteditable
+          spellcheck="false"
+          id="filename"
+          >icon</span>
+        <span>.svg</span>
+      </div>
+    </header>
+    <main>
+      <aside>
+        <section class="editor">
+          <nav class="buttons-config-paths">
+            <div style="display: flex; gap: 4px;">
+              <div class="icon-nav button-new-path">
+                <span class="tooltip tooltip-top">new path</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="29" viewBox="0 0 24 24"><path stroke-width=".1" fill="#222" d="M5.616 20q-.691 0-1.153-.462T4 18.384V5.616q0-.691.463-1.153T5.616 4h5v1h-5q-.231 0-.424.192T5 5.616v12.769q0 .23.192.423t.423.192h12.77q.23 0 .423-.192t.192-.423v-5h1v5q0 .69-.462 1.153T18.384 20zM16 11V8h-3V7h3V4h1v3h3v1h-3v3z"></path></svg>
+              </div>
+              
+              <div class="stroke-path">
+                <label>
+                  <span class="tooltip tooltip-top">stroke color</span>
+                  <input id="styleStroke" type="color" style="opacity: 0; width: 0px; height: 0px; position: absolute;">
+                
+                  <svg  xmlns="http://www.w3.org/2000/svg" class="icon-stroke-color"  width="30"  height="30"  viewBox="0 0 24 24"  fill="none"  stroke-width="1"  stroke-linecap="round"  stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 17c3.333 -3.333 5 -6 5 -8c0 -3 -1 -3 -2 -3s-2.032 1.085 -2 3c.034 2.048 1.658 4.877 2.5 6c1.5 2 2.5 2.5 3.5 1l2 -3c.333 2.667 1.333 4 3 4c.53 0 2.639 -2 3 -2c.517 0 1.517 .667 3 2" /></svg>
+                </label>
+
+                <input 
+                  id="styleStrokeWith"
+                  type="number" 
+                  min="0"
+                  max="10"
+                  step=".1"
+                  value=".5">
+              </div>
+
+              <div class="icon-nav icon-fill-color">
+                <span class="tooltip tooltip-top">fill color</span>
+                <label>
+                  <input id="styleFill" type="color" style="opacity: 0; width: 0px; height: 0px; position: absolute;">
+
+                  <svg  xmlns="http://www.w3.org/2000/svg" class="" width="28"  height="28"  viewBox="0 0 24 24"  fill="none"    stroke-width="1"  stroke-linecap="round"  stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 21a9 9 0 0 1 0 -18c4.97 0 9 3.582 9 8c0 1.06 -.474 2.078 -1.318 2.828c-.844 .75 -1.989 1.172 -3.182 1.172h-2.5a2 2 0 0 0 -1 3.75a1.3 1.3 0 0 1 -1 2.25" /><path d="M8.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M12.5 7.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M16.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /></svg>
+                </label>
+              </div>
+            </div>
+            
+
+            
+            <div class="icon-nav button-remove-path">
+              <span class="tooltip tooltip-top">erase path</span>
+              <svg  xmlns="http://www.w3.org/2000/svg"  width="28"  height="28"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M19 20h-10.5l-4.21 -4.3a1 1 0 0 1 0 -1.41l10 -10a1 1 0 0 1 1.41 0l5 5a1 1 0 0 1 0 1.41l-9.2 9.3" /><path d="M18 13.3l-6.3 -6.3" /></svg>
+            </div>
+          </nav>
+
+          <div class="wrapple-edit">
+            <div class="paths-buttons">
+    
+            </div>
+            <textarea
+              name="commands"
+              id="commnands"
+              class="scrollbar"
+              spellcheck="false"
+              cols="33"
+              rows="10"></textarea>
           </div>
-          <div class="tres2 ico">
-            <svg id="tres2" stroke-width="2px" stroke="currentColor" fill="#000" viewBox="0 0 25 25"><path /></svg>
+
+          <div class="suggestions">
+            ...
+          </div>
+        </section>
+
+        <section class="saved-files">
+          <div class="header">
+            <h4>History</h4>
+            <p>Manages the svg history</p>
+          </div>
+
+          <div class="new-svg">
+            <button class="button-new-svg">New</button>
+            <button class="button-close-history-files">Close</button>
+          </div>
+
+          <div class="files scrollbar"></div>
+        </section>
+
+      </aside>
+
+      <section class="area">
+        <div class="wrapple-area">
+          <div class="config-area-design">
+            <div class="stroke-path">
+              
+              <svg  xmlns="http://www.w3.org/2000/svg"  width="28"  height="28"  viewBox="0 0 24 24"  fill="none"  stroke="#222"  stroke-width="1"  stroke-linecap="round"  stroke-linejoin="round" ><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 19.875c0 .621 -.512 1.125 -1.143 1.125h-5.714a1.134 1.134 0 0 1 -1.143 -1.125v-15.875a1 1 0 0 1 1 -1h5.857c.631 0 1.143 .504 1.143 1.125z" /><path d="M12 9h-2" /><path d="M12 6h-3" /><path d="M12 12h-3" /><path d="M12 18h-3" /><path d="M12 15h-2" /><path d="M21 3h-4" /><path d="M19 3v18" /><path d="M21 21h-4" /></svg>
+
+              <input 
+                class="height-area"
+                type="number" 
+                min="0"
+                max="40"
+                step="1"
+                value="25">
+            </div>
+
+            <div class="stroke-path">
+              <svg  xmlns="http://www.w3.org/2000/svg"  width="28"  height="28"  viewBox="0 0 24 24"  fill="none"  stroke="#222"  stroke-width="1"  stroke-linecap="round"  stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M19.875 12c.621 0 1.125 .512 1.125 1.143v5.714c0 .631 -.504 1.143 -1.125 1.143h-15.875a1 1 0 0 1 -1 -1v-5.857c0 -.631 .504 -1.143 1.125 -1.143h15.75z" /><path d="M9 12v2" /><path d="M6 12v3" /><path d="M12 12v3" /><path d="M18 12v3" /><path d="M15 12v2" /><path d="M3 3v4" /><path d="M3 5h18" /><path d="M21 3v4" /></svg>
+
+              <input 
+                class="width-area"
+                type="number" 
+                min="0"
+                max="40"
+                step="1"
+                
+                value="25">
+            </div>
+          </div>
+
+          <div
+            class="wrapper-design"
+            >
+            <div id="panel-position-cursor"></div>
+            <div class="design-image-template"></div>
+            <svg
+              class="view allsvg"
+              id="canvas"
+              >
+              <path fill="transparent" stroke="#e4e4e4" stroke-width=".05" d="M0 0"/>
+            </svg>
+          </div> 
+        </div>
+
+        <div class="tools">
+          <div class="configIcons">
+            <div class="icon-nav">
+              <span class="tooltip tooltip-top">background color</span>
+              <label>
+                <input id="styleBg" type="color" style="opacity: 0; width: 0px; height: 0px; position: absolute;" value="#ffffff">
+
+                <svg  xmlns="http://www.w3.org/2000/svg"  width="28"  height="28"  viewBox="0 0 24 24"  fill="none"  stroke="#222"  stroke-width="1"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-contrast-2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 5a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" /><path d="M3 19h2.25c3.728 0 6.75 -3.134 6.75 -7s3.022 -7 6.75 -7h2.25" /></svg>
+              </label>
+            </div>
+
+            <div class="icon-nav example">
+              <span class="tooltip tooltip-top">example</span>
+              <svg  xmlns="http://www.w3.org/2000/svg"  width="28"  height="28"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 3a12 12 0 0 0 8.5 3a12 12 0 0 1 -8.5 15a12 12 0 0 1 -8.5 -15a12 12 0 0 0 8.5 -3" /></svg>
+            </div>
+
+            <div class="copy-down-icon">
+              <div class="icon-nav btn-down">
+                <span class="tooltip tooltip-top">download svg</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"  stroke="currentColor" stroke-width="1"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" /><path d="M7 11l5 5l5 -5" /><path d="M12 4l0 12" /></svg>
+              </div>
+              <div class="icon-nav btn-copy">
+                <span class="tooltip tooltip-top">copy svg</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"  stroke="currentColor"  stroke-width="1"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7m0 2.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667z" /><path d="M4.012 16.737a2.005 2.005 0 0 1 -1.012 -1.737v-10c0 -1.1 .9 -2 2 -2h10c.75 0 1.158 .385 1.5 1" /></svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="icons">
+            <div class="cent28 sample-icon">
+              <svg id="cent28" class="allsvg"></svg>
+            </div>
+            
+            <div class="cont-icons">
+              <div class="sis4 sample-icon">
+                <svg id="sis4" class="allsvg"></svg>
+              </div>
+
+              <div class="tres2 sample-icon">
+                <svg id="tres2" class="allsvg"></svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="size">size: 3,5 kb</div>
+          
+          <div class="template">
+            <p>Template</p>
+
+            <div class="buttons-template">
+              <div class="area-template"></div>
+
+              <div class="buttons">
+                <button class="button-up">⬆</button>
+                <button class="button-down">⬇</button>
+                <button class="button-left">⬅</button>
+                <button class="button-right" style="margin-bottom: 12px">➡</button>
+                
+                <button class="button-plus" style="font-weight: bolder">+</button>
+                <button class="button-minus" style="font-weight: bolder">-</button>
+                
+              </div>
+            </div>
           </div>
         </div>
+
+      </section>
+    </main>
+
+    <footer>
+      <div>
+        Make by JosenDEV
       </div>
-
-      <div class="configIcons">
-        <div>Background: </div>
-        <input type="color" id="styleBg" value="#ffffff">
+      <div>
+        <a href="https://github.com/JosueJosende/SVG">
+        <svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="currentColor"  ><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5.315 2.1c.791 -.113 1.9 .145 3.333 .966l.272 .161l.16 .1l.397 -.083a13.3 13.3 0 0 1 4.59 -.08l.456 .08l.396 .083l.161 -.1c1.385 -.84 2.487 -1.17 3.322 -1.148l.164 .008l.147 .017l.076 .014l.05 .011l.144 .047a1 1 0 0 1 .53 .514a5.2 5.2 0 0 1 .397 2.91l-.047 .267l-.046 .196l.123 .163c.574 .795 .93 1.728 1.03 2.707l.023 .295l.007 .272c0 3.855 -1.659 5.883 -4.644 6.68l-.245 .061l-.132 .029l.014 .161l.008 .157l.004 .365l-.002 .213l-.003 3.834a1 1 0 0 1 -.883 .993l-.117 .007h-6a1 1 0 0 1 -.993 -.883l-.007 -.117v-.734c-1.818 .26 -3.03 -.424 -4.11 -1.878l-.535 -.766c-.28 -.396 -.455 -.579 -.589 -.644l-.048 -.019a1 1 0 0 1 .564 -1.918c.642 .188 1.074 .568 1.57 1.239l.538 .769c.76 1.079 1.36 1.459 2.609 1.191l.001 -.678l-.018 -.168a5.03 5.03 0 0 1 -.021 -.824l.017 -.185l.019 -.12l-.108 -.024c-2.976 -.71 -4.703 -2.573 -4.875 -6.139l-.01 -.31l-.004 -.292a5.6 5.6 0 0 1 .908 -3.051l.152 -.222l.122 -.163l-.045 -.196a5.2 5.2 0 0 1 .145 -2.642l.1 -.282l.106 -.253a1 1 0 0 1 .529 -.514l.144 -.047l.154 -.03z" /></svg>
+        GitHub
+        </a>
       </div>
-      <div class="configIcons">
-        <div>Stroke Width: </div>
-        <input class="range" type="range" min="0" max="10" step=".1" value=".5" id="styleStrokeWith">
-      </div>
-      <div class="configIcons">
-        <div>Stroke Color: </div>
-        <input type="color" id="styleStroke">
-      </div>
-      <div class="configIcons">
-        <div>Fill Color: </div>
-        <input type="color" id="styleFill">
-      </div>
-    </section>
-  </main>
+    </footer>
 
-  <div class="inputs">
-    <div class="controles">
-      <textarea name="commands" id="commnands" cols="33" rows="10"></textarea>
-      <div class="actions">
-        <button onclick="prinExample()">EXAMPLE</button>
-        <button onclick="clearIcon()">CLEAR</button>
-      </div>
-    </div>
-  </div>
-
-
-  <!--<div class="col-md-6">
-
-    <svg width="500" height="500">
-      <defs>
-        <g id="cross">
-          <rect x="-5" y="-5" width="10" height="10" fill="none" stroke="#aaa" stroke-width="1px" />
-        </g>
-        <g id="crossFilled">
-          <rect x="-5" y="-5" width="10" height="10" fill="orange" stroke="#aaa" stroke-width="1px" />
-        </g>
-      </defs>
-      <g id="grid"></g>
-      <g id="curve"></g>
-
-    </svg>
-  </div>
-
-  <div class="col-md-6">
-    <h2>Path</h2>
-    <pre class="log"></pre>
-    <h3>Data</h3>
-    <pre class="data"></pre>
-  </div>-->
-
-
-  
-  <script src="./app.js"></script>
-
-</body>
+  </body>
 </html>
